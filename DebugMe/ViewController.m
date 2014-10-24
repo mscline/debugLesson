@@ -35,6 +35,7 @@
 -(void)setup
 {
 
+
     self.array = [NSMutableArray new];
     self.arrayOfLabels = [NSMutableArray new];
 
@@ -112,22 +113,34 @@
 -(void)createLabelsDisplay  // using fast enumeration would be cool, too
 {
 
-    int index = 0;
 
-    for(int i = 0; i == [self.arrayOfLabels count]; i++)
+    for(NSString *str in self.array)
     {
-
-        [self createNextLabelWithText:[self.array objectAtIndex:i]
-                          indexNumber:index];
+        // load array of labels
+        [self.arrayOfLabels addObject:str];
 
     }
+
+    for(int i = 0; i <= [self.arrayOfLabels count] ; i++)
+    {
+
+        [self createNextLabelWithText:[self.arrayOfLabels objectAtIndex:i]
+                          indexNumber:i];
+
+    }
+
     
 }
 
 -(void)createNextLabelWithText:(NSString *)textForLabel indexNumber:(int)index
 {
 
-    UILabel *label = [UILabel new];
+    float xPosition = 100.0;
+    float yPosition = index * 100.0 + 150;
+    float width = 300;
+    float height = 80;
+
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(xPosition, yPosition, width, height)];
     label.backgroundColor = [UIColor grayColor];
     label.text = textForLabel;
     label.tag = index;          // use if need to find it (don't really like approach)
@@ -166,11 +179,4 @@
 
 
 
-/*
- 
- float xPosition = 100.0;
- float yPosition = index * 100.0 + 150;
- float width = 300;
- float height = 80;
 
-*/
